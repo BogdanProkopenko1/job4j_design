@@ -18,13 +18,14 @@ public class EvenIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        if (count >= nums.length) return false;
-        if (check()) {
-            return true;
-        } else {
-            count++;
-            return hasNext();
+        boolean rsl = false;
+        if (count < nums.length) {
+            while (count + 1 < nums.length && !check()) {
+                count++;
+            }
+            rsl = check();
         }
+        return rsl;
     }
 
     @Override
