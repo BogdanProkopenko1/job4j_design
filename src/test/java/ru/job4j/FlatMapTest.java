@@ -1,9 +1,11 @@
-package ru.job4j.it;
+package ru.job4j;
 
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+import ru.job4j.iterator.FlatMap;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
