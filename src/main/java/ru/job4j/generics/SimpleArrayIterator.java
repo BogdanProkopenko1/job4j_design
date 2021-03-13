@@ -2,6 +2,7 @@ package ru.job4j.generics;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class SimpleArrayIterator<T> implements Iterator<T> {
 
@@ -14,7 +15,11 @@ public class SimpleArrayIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return cursor < data.length;
+        Optional<T> rsl = Optional.empty();
+        if (cursor < data.length) {
+            rsl = (Optional<T>) data[cursor];
+    }
+        return rsl.isPresent();
     }
 
     @Override
