@@ -8,18 +8,16 @@ public class SimpleArrayIterator<T> implements Iterator<T> {
 
     private T[] data;
     private int cursor = 0;
+    private int size;
 
-    public SimpleArrayIterator(T[] data) {
+    public SimpleArrayIterator(T[] data, int size) {
         this.data = data;
+        this.size = size;
     }
 
     @Override
     public boolean hasNext() {
-        Optional<T> rsl = Optional.empty();
-        if (cursor < data.length) {
-            rsl = (Optional<T>) data[cursor];
-    }
-        return rsl.isPresent();
+        return cursor < size;
     }
 
     @Override

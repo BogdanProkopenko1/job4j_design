@@ -17,26 +17,23 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void add(T model) {
-        if (checkIndex(count, models.length) >= 0) {
-            models[count++] = model;
-        }
+        checkIndex(count, models.length);
+        models[count++] = model;
     }
 
     public void set(int index, T model) {
-        if (checkIndex(index, count) >= 0) {
-            models[index] = model;
-        }
+        checkIndex(index, count);
+        models[index] = model;
     }
 
     public void remove(int index) {
-        if (checkIndex(index, count) >= 0) {
-            System.arraycopy(models, index + 1, models, index, models.length - 1);
-            count--;
-        }
+        checkIndex(index, count);
+        System.arraycopy(models, index + 1, models, index, models.length - 1);
+        count--;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new SimpleArrayIterator(this.models);
+        return new SimpleArrayIterator(this.models, this.count);
     }
 }
