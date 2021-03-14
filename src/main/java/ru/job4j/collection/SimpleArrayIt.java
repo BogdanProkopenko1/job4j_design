@@ -11,7 +11,7 @@ public class SimpleArrayIt<T> implements Iterator<T> {
     private final int modCountExpected;
     private SimpleArray<T> simpleArray;
 
-    public SimpleArrayIt(Object[] objects, int modCounter, SimpleArray<T> simpleArray) {
+    public SimpleArrayIt(T[] objects, int modCounter, SimpleArray<T> simpleArray) {
         this.objects = objects;
         modCountExpected = modCounter;
         this.simpleArray = simpleArray;
@@ -19,7 +19,7 @@ public class SimpleArrayIt<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return counter < objects.length && objects[counter] != null;
+        return counter < simpleArray.size;
     }
 
     @Override
