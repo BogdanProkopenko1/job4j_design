@@ -1,5 +1,6 @@
 package ru.job4j.collection;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 import static java.util.Objects.checkIndex;
@@ -7,11 +8,15 @@ import static java.util.Objects.checkIndex;
 public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] container;
-    public int size;
+    private int size;
     private int modCounter;
 
     public int getModCounter() {
         return modCounter;
+    }
+
+    public int size() {
+        return size;
     }
 
     public SimpleArray() {
@@ -19,11 +24,11 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     private void containerIncrease() {
-        Object[] rsl = new Object[container.length + 1];
-        for (int i = 0; i < container.length; i++) {
-            rsl[i] = container[i];
-        }
-        container = rsl;
+        container = Arrays.copyOf(container, container.length + 3);
+    }
+
+    public Object[] getAll() {
+        return container;
     }
 
     public T get(int index) {
@@ -41,6 +46,6 @@ public class SimpleArray<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new SimpleArrayIt(container, modCounter, this);
+        return new SimpleArrayIt(this);
     }
 }
