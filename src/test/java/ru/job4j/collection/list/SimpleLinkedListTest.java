@@ -23,7 +23,7 @@ public class SimpleLinkedListTest {
         List<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
-        list.get(2);
+        list.get(1);
     }
 
     @Test

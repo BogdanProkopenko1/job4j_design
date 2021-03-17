@@ -41,7 +41,7 @@ public class SimpleLinkedList<E> implements List<E>, Iterable<E>{
 
     @Override
     public E get(int index) {
-        if (index >= size) {
+        if (index > size) {
             throw new IndexOutOfBoundsException();
         }
         int count = 0;
