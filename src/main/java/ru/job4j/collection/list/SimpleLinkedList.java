@@ -7,10 +7,10 @@ import static java.util.Objects.checkIndex;
 
 public class SimpleLinkedList<E> implements List<E>, Iterable<E>{
 
-    transient int size;
-    transient Node<E> first;
-    transient Node<E> last;
-    transient int modCount;
+    private int size;
+    private Node<E> first;
+    private Node<E> last;
+    private int modCount;
 
     private static class Node<E> {
 
@@ -41,12 +41,11 @@ public class SimpleLinkedList<E> implements List<E>, Iterable<E>{
 
     @Override
     public E get(int index) {
-        if (index > size) {
+        if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        int count = 0;
         Node<E> rsl = first;
-        while (count < size) {
+        for (int count = 0; count < size; count++) {
             if (index == 0) {
                 return rsl.element;
             }
@@ -63,7 +62,7 @@ public class SimpleLinkedList<E> implements List<E>, Iterable<E>{
     public Iterator<E> iterator() {
         return new Iterator<E>() {
 
-            private Node<E> node;
+            private Node<E> node = first;
             private int count;
 
             @Override
@@ -76,7 +75,10 @@ public class SimpleLinkedList<E> implements List<E>, Iterable<E>{
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return get(count++);
+                E rtn = node.element;
+                node = node.next;
+                count++;
+                return rtn;
             }
         };
     }
