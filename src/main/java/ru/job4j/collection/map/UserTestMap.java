@@ -7,10 +7,11 @@ import java.util.Map;
 public class UserTestMap {
 
     public static void main(String[] args) {
-        User user = new User("Alexander", 0, Calendar.getInstance());
+        User userFirst = new User("Alexander", 0, Calendar.getInstance());
+        User userSecond = new User("Alexander", 0, Calendar.getInstance());
         Map<User, Object> map = new HashMap<>();
-        map.put(user, "First");
-        map.put(user, "Second");
+        map.put(userFirst, new Object());
+        map.put(userSecond, new Object());
         System.out.println(map);
     }
 }
