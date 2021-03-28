@@ -14,5 +14,4 @@ public class UserTestMap {
         map.put(userSecond, new Object());
         System.out.println(map);
     }
-
 }
