@@ -13,11 +13,12 @@ class SimpleTree<E> implements Tree<E> {
     @Override
     public boolean add(E parent, E child) {
         boolean rsl = false;
-        Node<E> el = findBy(parent).isPresent() ? findBy(parent).get() : null;
-        if (el != null) {
-            Optional<E> val = el.children.stream().map(eNode -> eNode.value).filter(e -> e.equals(child)).findFirst();
+        Optional<Node<E>> el = findBy(parent);
+        Optional<Node<E>> children = findBy(child);
+        if (el.isPresent() && children.isEmpty()) {
+            Optional<E> val = el.get().children.stream().map(eNode -> eNode.value).filter(e -> e.equals(child)).findFirst();
             if (!val.isPresent()) {
-                el.children.add(new Node<>(child));
+                el.get().children.add(new Node<>(child));
                 rsl = true;
             }
         }
