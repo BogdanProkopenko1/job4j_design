@@ -12,17 +12,13 @@ class SimpleTree<E> implements Tree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        boolean rsl = false;
         Optional<Node<E>> el = findBy(parent);
-        Optional<Node<E>> children = findBy(child);
-        if (el.isPresent() && children.isEmpty()) {
-            Optional<E> val = el.get().children.stream().map(eNode -> eNode.value).filter(e -> e.equals(child)).findFirst();
-            if (!val.isPresent()) {
-                el.get().children.add(new Node<>(child));
-                rsl = true;
-            }
+        if (el.isPresent() && findBy(child).isEmpty()) {
+            el.get().children.add(new Node<>(child));
+            return true;
+        } else {
+            return false;
         }
-        return rsl;
     }
 
     @Override
@@ -39,5 +35,19 @@ class SimpleTree<E> implements Tree<E> {
             data.addAll(el.children);
         }
         return rsl;
+    }
+
+    @Override
+    public boolean isBinary() {
+        return queue().stream()
+                .filter(e -> e.children.size() > 2)
+                .findFirst()
+                .isEmpty();
+    }
+
+    private Queue<Node<E>> queue() {
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        return data;
     }
 }
