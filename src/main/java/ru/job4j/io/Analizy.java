@@ -33,10 +33,14 @@ public class Analizy {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try (BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(target))) {
-            Iterator<String> iterator = rsl.iterator();
-            while (iterator.hasNext()) {
-                out.write((iterator.next() + System.lineSeparator()).getBytes());
+        write(rsl, target);
+    }
+
+    private void write(List<String> list, String target) {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(target))) {
+            for (String s : list) {
+                out.write(s);
+                out.newLine();
             }
         } catch (Exception e) {
             e.printStackTrace();
