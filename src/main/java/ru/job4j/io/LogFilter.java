@@ -12,11 +12,8 @@ public class LogFilter {
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             String str;
             while ((str = in.readLine()) != null) {
-                String[] arr = str.split(" ");
-                for (String s : arr) {
-                    if (s.equals("404")) {
-                        rsl.add(" NEW " + str);
-                    }
+                if (str.contains("404")) {
+                    rsl.add(str);
                 }
             }
         } catch (Exception e) {
@@ -38,7 +35,9 @@ public class LogFilter {
 
     public static void main(String[] args) {
         List<String> log = filter("log.txt");
-        System.out.println(log);
+        for (String el : log) {
+            System.out.println(el);
+        }
         save(log, "RESULT.txt");
     }
 }
