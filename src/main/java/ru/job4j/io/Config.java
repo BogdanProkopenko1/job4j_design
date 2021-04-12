@@ -2,11 +2,7 @@ package ru.job4j.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Config {
 
@@ -21,7 +17,10 @@ public class Config {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines().filter(a -> a.length() > 0 && !a.contains("#")).forEach(el -> {
                 String[] key = el.split("=");
-                values.put(key[0], key.length > 1 ? key[1] : null);
+                if (key.length != 2) {
+                    throw new IllegalArgumentException();
+                }
+                values.put(key[0], key[1]);
             });
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,11 +28,7 @@ public class Config {
     }
 
     public String value(String key) {
-        String rsl = values.get(key);
-        if (rsl == null) {
-            throw new IllegalArgumentException();
-        }
-        return rsl;
+        return values.get(key);
     }
 
     @Override
@@ -51,4 +46,53 @@ public class Config {
         System.out.println(new Config("C:\\projects\\job4j_design\\app.propeties"));
     }
 
+    /*
+    public void loadd() {
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+            List<String> list = new ArrayList<String>();
+            read.lines().forEach(list::add);
+            for (String el : list) {
+                if (el.startsWith("#") || el.length() == 0) {
+                    continue;
+                }
+                String[] arr = el.split("=");
+                if (arr.length != 2) {
+                    throw new IllegalArgumentException();
+                }
+                values.put(arr[0], arr[1]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void load() {
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+            read.lines().filter(a -> a.length() > 0 && !a.contains("#")).forEach(el -> {
+                String[] key = el.split("=");
+                if (key.length != 2) {
+                    throw new IllegalArgumentException();
+                }
+                values.put(key[0], key[1]);
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+        public void load() {
+        try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+            Stream<String> rsl = read.lines().filter(a -> a.length() > 0 && !a.contains("#"));
+                rsl.forEach({
+                        String[] key = el.split("="));
+                if (key.length != 2) {
+                    throw new IllegalArgumentException();
+                }
+                values.put(key[0], key[1])
+            };
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     */
 }

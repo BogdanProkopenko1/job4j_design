@@ -1,7 +1,10 @@
 name=Petr Arsentev
+=1541
 hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 hibernate.connection.url=jdbc:postgresql://127.0.0.1:5432/trackstudio
 hibernate.connection.driver_class=org.postgresql.Driver
 hibernate.connection.username=postgres
 #key=21235624563
+123=
+wgfdefe=
 hibernate.connection.password=password

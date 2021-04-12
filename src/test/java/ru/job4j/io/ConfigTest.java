@@ -9,25 +9,25 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutComment() {
-        String path = "C:\\projects\\job4j_design\\app.propeties";
+        String path = ".\\app.propeties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name"),is("Petr Arsentev"));
+        assertThat(config.value("hibernate.connection.password"),is("password"));
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void whenComment() {
-        String path = "C:\\projects\\job4j_design\\app.propeties";
+        String path = ".\\app.propeties";
         Config config = new Config(path);
         config.load();
         assertNull(config.value("key"));
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void whenIllegalArgExcep() {
-        String path = "C:\\projects\\job4j_design\\app.propeties";
+    public void whenIllegalArgException() {
+        String path = ".\\apperror.propeties";
         Config config = new Config(path);
         config.load();
-        config.value("rsl");
     }
 }
