@@ -9,7 +9,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutComment() {
-        String path = ".\\app.propeties";
+        String path = "./app.propeties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name"),is("Petr Arsentev"));
@@ -18,7 +18,7 @@ public class ConfigTest {
 
     @Test
     public void whenComment() {
-        String path = ".\\app.propeties";
+        String path = "./app.propeties";
         Config config = new Config(path);
         config.load();
         assertNull(config.value("key"));
@@ -26,7 +26,7 @@ public class ConfigTest {
 
     @Test (expected = IllegalArgumentException.class)
     public void whenIllegalArgException() {
-        String path = ".\\apperror.propeties";
+        String path = "./apperror.propeties";
         Config config = new Config(path);
         config.load();
     }

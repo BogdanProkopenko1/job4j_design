@@ -2,6 +2,7 @@ package ru.job4j.io;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Config {
@@ -22,7 +23,7 @@ public class Config {
                 }
                 values.put(key[0], key[1]);
             });
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
