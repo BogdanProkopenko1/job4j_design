@@ -19,11 +19,11 @@ public class Analizy {
                     throw new IllegalArgumentException();
                 }
                 int j = Integer.parseInt(arr[0]);
-                if ((j == 400 || j == 500) && active == true) {
+                if ((j == 400 || j == 500) && active) {
                     rsl.add(arr[1]);
                     count++;
                     active = false;
-                } else if ((j == 200 || j == 300) && active == false) {
+                } else if ((j == 200 || j == 300) && !active) {
                     String change = rsl.get(count - 1) + ";" + arr[1];
                     rsl.set(count - 1, change);
                     active = true;

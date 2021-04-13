@@ -22,11 +22,11 @@ public class AnalizyTest {
         File target = folder.newFile("target.txt");
         try (PrintWriter writer = new PrintWriter(source)) {
             writer.write(
-                    "200 10:56:01\n" +
-                    "200 10:57:01\n" +
-                    "400 10:58:01\n" +
-                    "200 10:59:01\n" +
-                    "500 11:01:02\n" +
+                    "200 10:56:01" + System.lineSeparator() +
+                    "200 10:57:01" + System.lineSeparator() +
+                    "400 10:58:01" + System.lineSeparator() +
+                    "200 10:59:01" + System.lineSeparator() +
+                    "500 11:01:02" + System.lineSeparator() +
                     "200 11:02:02"
             );
         }
@@ -38,10 +38,10 @@ public class AnalizyTest {
                 rsl.append(string);
             });
         }
-        String ex = "<10:58:01;10:59:01\n" +
-                "11:01:02;11:02:02\n" +
-                ">";
-        assertThat(rsl, is(ex));
+        String f = String.valueOf(rsl);
+        String exp = "10:58:01;10:59:01" + System.lineSeparator() + "11:01:02;11:02:02" + System.lineSeparator();
+        //StringBuilder exp = new StringBuilder();
+        //exp.append("10:58:01;10:59:01").append(System.lineSeparator()).append("11:01:02;11:02:02").append(System.lineSeparator()).append("");
+        assertThat(f, is(exp));
     }
-
 }
