@@ -11,10 +11,10 @@ public class Tiger extends Predator {
 
     @Override
     public String toString() {
-        return "Tiger{" +
-                "age=" + age +
-                "habitat=" + getHabitat() +
-                "area=" + getArea() +
-                '}';
+        return "Tiger{"
+                + "age=" + age
+                + "habitat=" + getHabitat()
+                + "area=" + getArea()
+                + '}';
     }
 }

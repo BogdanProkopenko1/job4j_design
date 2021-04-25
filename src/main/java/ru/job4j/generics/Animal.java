@@ -14,8 +14,8 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Animal{" +
-                "habitat='" + habitat + '\'' +
-                '}';
+        return "Animal{"
+                + "habitat='" + habitat + '\''
+                + '}';
     }
 }

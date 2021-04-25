@@ -15,9 +15,9 @@ public class Predator extends Animal {
 
     @Override
     public String toString() {
-        return "Predator{" +
-                "area='" + area + '\'' +
-                "habitat=" + getHabitat() +
-                '}';
+        return "Predator{"
+                + "area='" + area + '\''
+                + "habitat=" + getHabitat()
+                + '}';
     }
 }
