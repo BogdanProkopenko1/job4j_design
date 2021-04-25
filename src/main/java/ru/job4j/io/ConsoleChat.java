@@ -28,7 +28,7 @@ public class ConsoleChat {
         String msg = scn.nextLine();
         stringBuilder.append(msg).append(System.lineSeparator());
         boolean write = true;
-        while(!msg.equals(OUT)) {
+        while (!msg.equals(OUT)) {
             if (write && msg.equals(STOP)) {
                 write = false;
             } else if (msg.equals(CONTINUE)) {

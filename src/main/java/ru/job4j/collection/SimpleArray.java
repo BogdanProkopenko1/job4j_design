@@ -46,6 +46,6 @@ public class SimpleArray<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new SimpleArrayIt(this);
+        return new SimpleArrayIt<T>(this);
     }
 }
