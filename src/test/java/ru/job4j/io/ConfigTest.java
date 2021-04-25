@@ -12,8 +12,8 @@ public class ConfigTest {
         String path = "./app.propeties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("name"),is("Petr Arsentev"));
-        assertThat(config.value("hibernate.connection.password"),is("password"));
+        assertThat(config.value("name"), is("Petr Arsentev"));
+        assertThat(config.value("hibernate.connection.password"), is("password"));
     }
 
     @Test
