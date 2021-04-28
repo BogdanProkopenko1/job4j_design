@@ -19,6 +19,7 @@ public class EchoServer {
                         if (str.startsWith("GET /?")) {
                             String[] arguments = str.split("[= ]");
                             if (arguments[2].equals("Exist")) {
+                                out.write("Server close.".getBytes());
                                 socket.close();
                                 server.close();
                             } else if (arguments[2].equals("Hello")) {
