@@ -1,28 +1,20 @@
 package ru.job4j.serialization.java;
 
+import com.sun.xml.txw2.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
+
+@XmlElement(value = "user")
+
 public class User {
 
+    @XmlAttribute
     private String name;
     private String pass;
 
+    public User() { }
+
     public User(String name, String pass) {
         this.name = name;
-        this.pass = pass;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
         this.pass = pass;
     }
 
