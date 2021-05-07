@@ -1,0 +1,1 @@
+update accounts set mail='testmail', acces=true;
