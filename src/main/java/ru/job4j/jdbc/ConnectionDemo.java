@@ -23,8 +23,8 @@ public class ConnectionDemo {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Class.forName("org.postgresql.Driver");
-        try (Connection connection = DriverManager.getConnection(map.get("url"), map.get("login"), map.get("password"))) {
+        Class.forName(map.get("hibernate.connection.driver_class"));
+        try (Connection connection = DriverManager.getConnection(map.get("hibernate.connection.url"), map.get("hibernate.connection.username"), map.get("hibernate.connection.password"))) {
             DatabaseMetaData metaData = connection.getMetaData();
             System.out.println(metaData.getUserName());
             System.out.println(metaData.getURL());
