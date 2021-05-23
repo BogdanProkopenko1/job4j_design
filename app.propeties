@@ -5,3 +5,6 @@ hibernate.connection.driver_class=org.postgresql.Driver
 hibernate.connection.username=postgres
 #key=21235624563
 hibernate.connection.password=password
+url=jdbc:postgresql://localhost:5432/idea_bd
+login=postgres
+password=password
