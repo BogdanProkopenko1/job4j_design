@@ -13,7 +13,7 @@ public class ConnectionDemo {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         Map<String, String> map = new HashMap<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("./app.propeties"))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("./app.properties"))) {
             String st = bufferedReader.readLine();
             while (st != null) {
                 String[] els = st.split("=");

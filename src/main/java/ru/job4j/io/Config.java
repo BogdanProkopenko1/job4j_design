@@ -44,6 +44,6 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Config("C:/projects/job4j_design/app.propeties"));
+        System.out.println(new Config("C:/projects/job4j_design/app.properties"));
     }
 }
