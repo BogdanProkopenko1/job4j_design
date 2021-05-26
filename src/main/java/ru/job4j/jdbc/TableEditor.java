@@ -1,5 +1,7 @@
 package ru.job4j.jdbc;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.sql.*;
 import java.util.Properties;
 
@@ -22,9 +24,8 @@ public class TableEditor implements AutoCloseable {
         );
     }
 
-    private void SQLAction(String sql){
-        try {
-            Statement statement = connection.createStatement();
+    private void Action(String sql){
+        try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -32,23 +33,23 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) {
-        SQLAction(String.format("create table %s()", tableName));
+        Action(String.format("create table %s()", tableName));
     }
 
     public void dropTable(String tableName) {
-        SQLAction(String.format("drop table %s", tableName));
+        Action(String.format("drop table %s", tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        SQLAction(String.format("alter table %s add column %s %s", tableName, columnName, type));
+        Action(String.format("alter table %s add column %s %s", tableName, columnName, type));
     }
 
     public void dropColumn(String tableName, String columnName) {
-        SQLAction(String.format("alter table %s drop column %s", tableName, columnName));
+        Action(String.format("alter table %s drop column %s", tableName, columnName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        SQLAction(String.format("alter table %s rename column %s to %s", tableName, columnName, newColumnName));
+        Action(String.format("alter table %s rename column %s to %s", tableName, columnName, newColumnName));
     }
 
     public String getScheme(String tableName) throws Exception {
@@ -64,6 +65,22 @@ public class TableEditor implements AutoCloseable {
             }
         }
         return scheme.toString();
+    }
+
+    public static void main(String[] args) throws Exception {
+        Properties properties = new Properties();
+        properties.load(new BufferedReader(new FileReader("app.properties")));
+        TableEditor tableEditor = new TableEditor(properties);
+        tableEditor.createTable("example_table");
+        System.out.println(tableEditor.getScheme("example_table"));
+        tableEditor.addColumn("example_table", "first", "text");
+        tableEditor.addColumn("example_table", "second", "varchar(256)");
+        System.out.println(tableEditor.getScheme("example_table"));
+        tableEditor.renameColumn("example_table", "second", "column_from_delete");
+        System.out.println(tableEditor.getScheme("example_table"));
+        tableEditor.dropColumn("example_table", "column_from_delete");
+        System.out.println(tableEditor.getScheme("example_table"));
+        tableEditor.dropTable("example_table");
     }
 
     @Override
