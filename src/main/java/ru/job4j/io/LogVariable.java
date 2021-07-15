@@ -17,7 +17,6 @@ public class LogVariable {
         double db = 6.5D;
         boolean bl = false;
         char ch = 'a';
-        BasicConfigurator.configure();
         LOG.info("Info byte: {}", bt);
         LOG.info("Info short: {}", st);
         LOG.info("Info int: {}", it);
