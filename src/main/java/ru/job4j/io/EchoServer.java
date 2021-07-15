@@ -12,27 +12,31 @@ public class EchoServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(EchoServer.class.getName());
 
     public static void main(String[] args) {
-        try (ServerSocket server = new ServerSocket(9500)) {
+        try (ServerSocket server = new ServerSocket(9000)) {
             while (!server.isClosed()) {
                 Socket socket = server.accept();
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
-                    String str;
-                    while (!(str = in.readLine()).isEmpty()) {
+                    String str = in.readLine();
+                    while (!(str).isEmpty()) {
                         System.out.println(str);
                         if (str.startsWith("GET /?")) {
                             String[] arguments = str.split("[= ]");
-                            if (arguments[2].equals("Exist")) {
-                                out.write("Server close.".getBytes());
+                            if (arguments[2].equals("Exit")) {
+                                out.write("HTTP/1.1 200 CLOSED\r\n\r\n".getBytes());
+                                out.write("Server closed.".getBytes());
                                 socket.close();
                                 server.close();
                             } else if (arguments[2].equals("Hello")) {
-                                out.write("HTTP/1.1 200 HELLO\r\n".getBytes());
+                                out.write("HTTP/1.1 200 HELLO\r\n\r\n".getBytes());
+                                out.write("Hello, dear friend.".getBytes());
                             } else {
-                                out.write("HTTP/1.1 200 WHAT\r\n".getBytes());
+                                out.write("HTTP/1.1 200 WHAT\r\n\r\n".getBytes());
+                                out.write("Illegal argument.".getBytes());
                             }
                         }
+                        str = in.readLine();
                     }
                 }
             }
