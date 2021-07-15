@@ -8,7 +8,7 @@ create table attachs(
 	name varchar(100)
 );
 
-create table comments(
+create table category(
 	id serial primary key,
 	name varchar(100)
 );
@@ -16,11 +16,11 @@ create table comments(
 create table item(
 	id serial primary key,
 	name varchar(100),
-	comment_id int references comments(id),
-	attach_id int references attachs(id)
+	attach_id int references attachs(id),
+	category_id int references category(id)
 );
 
-create table category(
+create table comments(
 	id serial primary key,
 	name varchar(100),
 	item_id int references item(id)
