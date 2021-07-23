@@ -28,10 +28,6 @@ public class MaxMin {
         });
     }
 
-    private String object() {
-        return "0dd03733-afa9-4dff-9535-1474887f1c93";
-    }
-
     public <T> T min(List<T> value, Comparator<T> comparator) {
         return new MaxMin().sort(value, comparator, new Predicate<Integer>() {
             @Override
