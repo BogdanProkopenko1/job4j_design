@@ -24,15 +24,15 @@ public class EchoServer {
                         if (str.startsWith("GET /?")) {
                             String[] arguments = str.split("[= ]");
                             if (arguments[2].equals("Exit")) {
-                                out.write("HTTP/1.1 200 CLOSED\r\n\r\n".getBytes());
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                                 out.write("Server closed.".getBytes());
                                 socket.close();
                                 server.close();
                             } else if (arguments[2].equals("Hello")) {
-                                out.write("HTTP/1.1 200 HELLO\r\n\r\n".getBytes());
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                                 out.write("Hello, dear friend.".getBytes());
                             } else {
-                                out.write("HTTP/1.1 200 WHAT\r\n\r\n".getBytes());
+                                out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                                 out.write("Illegal argument.".getBytes());
                             }
                         }
