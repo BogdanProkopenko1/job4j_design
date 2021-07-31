@@ -1,6 +1,6 @@
 package ru.job4j.lsp;
 
-public interface ParkManager extends Parking {
+public interface ParkManager {
 
     public boolean park(Car car);
 }
