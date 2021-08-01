@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Storage {
 
-    public void add(Food food);
-
-    public List<Food> get();
+    void add(Food food);
+    boolean accept(Food food);
+    List<Food> get();
 }

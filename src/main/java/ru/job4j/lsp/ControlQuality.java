@@ -4,39 +4,14 @@ import java.util.*;
 
 public class ControlQuality {
 
-    private Map<String, Storage> storages;
+    private List<Storage> storages;
 
-    public ControlQuality(Map<String, Storage> storages) {
+    public ControlQuality(List<Storage> storages) {
         this.storages = storages;
     }
 
-    public Map<String, Storage> getStorages() {
+    public List<Storage> getStorages() {
         return storages;
-    }
-
-    private Storage check(Food food) {
-        double period = food.getExpiredDate().getTimeInMillis() - food.getCreateDate().getTimeInMillis();
-        double time = food.getExpiredDate().getTimeInMillis() - new GregorianCalendar().getTimeInMillis();
-        double percent = time / period;
-        Storage storage;
-        if (percent > 1) {
-            throw new IllegalArgumentException("Illegal date argument");
-        }
-        if (percent > 0 && percent < 0.75) {
-            storage = getStorages().get("shop");
-            if (percent < 0.25) {
-                food.setDiscount(food.getDiscount() + 0.3);
-            }
-        } else if (percent > 0.75) {
-            storage = getStorages().get("warehouse");
-        } else {
-            storage = getStorages().get("trash");
-        }
-        return storage;
-    }
-
-    private void act(Food f) {
-        check(f).add(f);
     }
 
     public static void main(String[] args) {
@@ -61,19 +36,20 @@ public class ControlQuality {
         Food drinks = new Drinks("Pepsi", c3, e3, 150, 0);
         Food chocolate = new Chocolate("Шоколад", c4, e4, 100, 0);
         List<Food> foods = List.of(milk, drinks, chocolate, meat);
-        Map<String, Storage> storages = new HashMap<>();
-        storages.put("warehouse", new Warehouse());
-        storages.put("shop", new Shop());
-        storages.put("trash", new Trash());
-        ControlQuality controlQuality = new ControlQuality(storages);
-        for (Food food : foods) {
-            controlQuality.act(food);
+        ControlQuality controlQuality =
+                new ControlQuality(List.of(new Warehouse(), new Shop(), new Trash()));
+        for (Storage storage : controlQuality.getStorages()) {
+            for (Food food : foods) {
+                if (storage.accept(food)) {
+                    storage.add(food);
+                }
+            }
         }
-        System.out.println("Shop= ");
-        storages.get("shop").get().forEach(System.out::println);
         System.out.println("Warehouse= ");
-        storages.get("warehouse").get().forEach(System.out::println);
+        controlQuality.getStorages().get(0).get().forEach(System.out::println);
+        System.out.println("Shop= ");
+        controlQuality.getStorages().get(1).get().forEach(System.out::println);
         System.out.println("Trash= ");
-        storages.get("trash").get().forEach(System.out::println);
+        controlQuality.getStorages().get(2).get().forEach(System.out::println);
     }
 }
