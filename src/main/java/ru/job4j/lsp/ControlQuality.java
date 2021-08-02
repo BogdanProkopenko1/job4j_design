@@ -11,6 +11,7 @@ public class ControlQuality {
     }
 
     public List<Storage> getStorages() {
+        List<Storage> storages = this.storages;
         return storages;
     }
 
