@@ -18,7 +18,8 @@ public class Trash implements Storage {
 
     @Override
     public List<Food> get() {
-        return storage;
+        List<Food> list = storage;
+        return list;
     }
 
     @Override

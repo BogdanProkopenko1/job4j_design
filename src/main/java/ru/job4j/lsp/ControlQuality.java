@@ -14,6 +14,14 @@ public class ControlQuality {
         return storages;
     }
 
+    public void act(Food food) {
+        for (Storage storage : getStorages()) {
+            if (storage.accept(food)) {
+                storage.add(food);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Calendar c1 = new GregorianCalendar();
         Calendar e1 = new GregorianCalendar();
@@ -38,12 +46,8 @@ public class ControlQuality {
         List<Food> foods = List.of(milk, drinks, chocolate, meat);
         ControlQuality controlQuality =
                 new ControlQuality(List.of(new Warehouse(), new Shop(), new Trash()));
-        for (Storage storage : controlQuality.getStorages()) {
-            for (Food food : foods) {
-                if (storage.accept(food)) {
-                    storage.add(food);
-                }
-            }
+        for (Food food : foods) {
+            controlQuality.act(food);
         }
         System.out.println("Warehouse= ");
         controlQuality.getStorages().get(0).get().forEach(System.out::println);
