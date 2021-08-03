@@ -22,6 +22,15 @@ public class ParkingTest {
     }
 
     @Test
+    public void parkHeavyCarOnLiteCarPlaces() {
+        assertTrue(
+                new UndergroundParking(100, 0)
+                        .parkCar(new Truck("Scania", 2.5D))
+        );
+    }
+
+
+    @Test
     public void checkPlaces() {
         Parking parking = new UndergroundParking(0, 0);
         assertFalse(parking.parkCar(new PassengerCar("Porsche 911 Carrera")));

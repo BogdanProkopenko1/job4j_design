@@ -1,6 +1,6 @@
 package ru.job4j.lsp;
 
-public class PassengerCar implements LiteCar {
+public class PassengerCar implements Car {
 
     private final int SIZE = 1;
     private String model;
@@ -14,7 +14,7 @@ public class PassengerCar implements LiteCar {
     }
 
     @Override
-    public int getSize() {
+    public double getSize() {
         return SIZE;
     }
 }
