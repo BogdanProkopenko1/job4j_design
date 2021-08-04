@@ -2,7 +2,7 @@ package ru.job4j.lsp;
 
 public class PassengerCar implements Car {
 
-    private final int SIZE = 1;
+    private final int size = 1;
     private String model;
 
     public PassengerCar(String model) {
@@ -14,7 +14,7 @@ public class PassengerCar implements Car {
     }
 
     @Override
-    public double getSize() {
-        return SIZE;
+    public int getSize() {
+        return size;
     }
 }

@@ -2,15 +2,15 @@ package ru.job4j.lsp;
 
 public class Truck implements Car {
 
-    private final double SIZE;
+    private final int size;
     private String model;
 
-    public Truck(String model, double size) {
+    public Truck(String model, int size) {
         if (size <= 0) {
             throw new IllegalArgumentException("Incorrect car size");
         }
         this.model = model;
-        this.SIZE = size;
+        this.size = size;
     }
 
     public String getModel() {
@@ -18,7 +18,7 @@ public class Truck implements Car {
     }
 
     @Override
-    public double getSize() {
-        return SIZE;
+    public int getSize() {
+        return size;
     }
 }

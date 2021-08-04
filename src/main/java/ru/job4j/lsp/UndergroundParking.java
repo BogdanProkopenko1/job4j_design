@@ -7,20 +7,23 @@ public class UndergroundParking implements Parking {
 
     private List<Car> carsParkedLitePlaces = new ArrayList<>();
     private List<Car> carsParkedHeavyPlaces = new ArrayList<>();
-    private final int LITE_PARK_PLACES;
-    private final int HEAVY_PARK_PLACES;
+    private final int liteParkPlaces;
+    private final int heavyParkPlaces;
     private int occupiedLite;
     private int occupiedHeavy;
 
     public UndergroundParking(int liteParkPlaces, int heavyParkPlaces) {
-        this.LITE_PARK_PLACES = liteParkPlaces;
-        this.HEAVY_PARK_PLACES = heavyParkPlaces;
+        if (liteParkPlaces < 0 || heavyParkPlaces < 0) {
+            throw new IllegalArgumentException("Parking cannot have a negative number of spaces")
+;        }
+        this.liteParkPlaces = liteParkPlaces;
+        this.heavyParkPlaces = heavyParkPlaces;
     }
 
     @Override
     public boolean parkCar(Car car) {
         boolean rsl = false;
-        double size = car.getSize();
+        int size = car.getSize();
         if (size == 1) {
             rsl = parkLiteCar(car);
         } else if (size > 1) {
@@ -31,7 +34,7 @@ public class UndergroundParking implements Parking {
 
     private boolean parkLiteCar(Car car) {
         boolean rsl = false;
-        if (occupiedLite < LITE_PARK_PLACES) {
+        if (occupiedLite < liteParkPlaces) {
             carsParkedLitePlaces.add(car);
             occupiedLite++;
             rsl = true;
@@ -41,12 +44,12 @@ public class UndergroundParking implements Parking {
 
     private boolean parkHeavyCar(Car car) {
         boolean rsl = false;
-        int size = (int) car.getSize();
-        if (HEAVY_PARK_PLACES - occupiedHeavy >= size) {
+        int size = car.getSize();
+        if (heavyParkPlaces > occupiedHeavy) {
             carsParkedHeavyPlaces.add(car);
-            occupiedHeavy += size;
+            occupiedHeavy++;
             rsl = true;
-        } else if (LITE_PARK_PLACES - occupiedLite >= size) {
+        } else if (liteParkPlaces - occupiedLite >= size) {
             carsParkedLitePlaces.add(car);
             occupiedLite += size;
             rsl = true;
