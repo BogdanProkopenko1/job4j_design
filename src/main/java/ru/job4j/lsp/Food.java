@@ -1,6 +1,7 @@
 package ru.job4j.lsp;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Food {
 
@@ -44,12 +45,12 @@ public class Food {
 
     @Override
     public String toString() {
-        return "Food{" +
-                "name='" + name + '\'' +
-                ", createDate=" + createDate.getTime() +
-                ", expiredDate=" + expiredDate.getTime() +
-                ", price=" + price +
-                ", discount=" + discount +
-                '}';
+        return "Food{"
+                + "name='" + name + '\''
+                + ", createDate=" + createDate.getTime()
+                + ", expiredDate=" + expiredDate.getTime()
+                + ", price=" + price
+                + ", discount=" + discount
+                + '}';
     }
 }

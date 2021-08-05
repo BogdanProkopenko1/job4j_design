@@ -7,4 +7,5 @@ public interface Storage {
     void add(Food food);
     boolean accept(Food food);
     List<Food> get();
+    void clear();
 }

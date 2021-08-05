@@ -23,11 +23,16 @@ public class Warehouse implements Storage {
     }
 
     @Override
+    public void clear() {
+        storage.clear();
+    }
+
+    @Override
     public boolean accept(Food food) {
         if (food == null) {
             throw new IllegalArgumentException();
         }
-        double quality = new QualityCheсking().percentQuality(food);
+        double quality = new QualityChecking().percentQuality(food);
         if (quality > 1) {
             throw new IllegalArgumentException("Incorrect food expired date");
         }

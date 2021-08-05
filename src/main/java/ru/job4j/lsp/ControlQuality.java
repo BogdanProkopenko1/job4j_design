@@ -16,8 +16,22 @@ public class ControlQuality {
     }
 
     public void act(Food food) {
-        for (Storage storage : getStorages()) {
+        for (Storage storage : storages) {
             if (storage.accept(food)) {
+                storage.add(food);
+            }
+        }
+    }
+
+    public void resort() {
+        List<Food> foods = new ArrayList<>();
+        for (Storage storage : storages) {
+            foods.addAll(storage.get());
+            storage.clear();
+        }
+        for (Storage storage : storages) {
+            for (Food food : foods) {
+                storage.accept(food);
                 storage.add(food);
             }
         }
