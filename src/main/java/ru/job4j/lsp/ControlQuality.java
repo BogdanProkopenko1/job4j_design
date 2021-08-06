@@ -31,8 +31,9 @@ public class ControlQuality {
         }
         for (Storage storage : storages) {
             for (Food food : foods) {
-                storage.accept(food);
-                storage.add(food);
+                if (storage.accept(food)) {
+                    storage.add(food);
+                }
             }
         }
     }
