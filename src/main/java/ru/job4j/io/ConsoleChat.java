@@ -1,9 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ConsoleChat {
@@ -13,48 +11,69 @@ public class ConsoleChat {
     private static final String OUT = "закончить";
     private static final String STOP = "стоп";
     private static final String CONTINUE = "продолжить";
+    private Scanner scn;
+    private List<String> log = new ArrayList<>();
+    private boolean write = true;
 
-    public ConsoleChat(String path, String botAnswers) {
+    public ConsoleChat(String path, String botAnswers, Scanner scanner) {
         this.path = path;
         this.botAnswers = botAnswers;
+        this.scn = scanner;
     }
 
-    public void run() throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        BufferedReader buffReader = new BufferedReader(new FileReader(botAnswers));
-        ArrayList<String> answers = buffReader.lines().collect(Collectors.toCollection(ArrayList::new));
-        Random random =  new Random();
-        Scanner scn = new Scanner(System.in);
-        String msg = scn.nextLine();
-        stringBuilder.append(msg).append(System.lineSeparator());
-        boolean write = true;
-        while (!msg.equals(OUT)) {
-            if (write && msg.equals(STOP)) {
-                write = false;
-            } else if (msg.equals(CONTINUE)) {
-                write = true;
-            }
+    public void run() {
+        List<String> answers = new ArrayList<>();
+        try (BufferedReader buffReader = new BufferedReader(new FileReader(botAnswers))) {
+            answers = buffReader.lines().collect(Collectors.toCollection(ArrayList::new));
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+        Random random = new Random();
+        boolean stop = writeMsg();
+        while (!stop) {
             if (write) {
                 String answer = answers.get(random.nextInt(answers.size()));
                 System.out.println(answer);
-                stringBuilder.append(answer).append(System.lineSeparator());
+                log.add(answer);
             }
-            msg = scn.nextLine();
-            stringBuilder.append(msg).append(System.lineSeparator());
+            stop = writeMsg();
         }
-        writer(stringBuilder);
+        write();
     }
 
-    private void writer(StringBuilder s) {
+    private boolean writeMsg() {
+        String msg = scn.nextLine();
+        boolean stop = false;
+        if (!msg.equals(OUT)) {
+            if (this.write && msg.equals(STOP)) {
+                this.write = false;
+            } else if (msg.equals(CONTINUE)) {
+                this.write = true;
+            }
+        } else {
+            stop = true;
+        }
+        log.add(msg);
+        return stop;
+    }
+
+    private void write() {
         try (BufferedWriter out = new BufferedWriter(new FileWriter(path))) {
-            out.write(String.valueOf(s));
+            for (String s : log) {
+                out.write(s);
+                out.write(System.lineSeparator());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        ConsoleChat cc = new ConsoleChat("C:/Users/pvzar/Desktop/Новая папка/log.txt", "C:/Users/pvzar/Desktop/Новая папка/answers.txt");
+    public static void main(String[] args) {
+        ConsoleChat cc = new ConsoleChat(
+                "C:/Users/pvzar/Desktop/log.csv/Новая папка (2)/Новая папка/log.txt",
+                "C:/Users/pvzar/Desktop/log.csv/Новая папка (2)/Новая папка/answers.txt",
+                new Scanner(System.in)
+        );
         cc.run();
     }
 }
