@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 
 import static java.util.Objects.checkIndex;
 
-public class SimpleLinkedList<E> implements List<E>, Iterable<E>{
+public class SimpleLinkedList<E> implements List<E>, Iterable<E> {
 
     private int size;
     private Node<E> first;

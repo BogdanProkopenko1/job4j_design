@@ -18,11 +18,19 @@ public class User {
         this.pass = pass;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", pass='" + pass + '\'' +
-                '}';
+        return "User{"
+                + "name='" + name + '\''
+                + ", pass='" + pass + '\''
+                + '}';
     }
 }

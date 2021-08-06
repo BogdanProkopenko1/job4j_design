@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class PassGenerator {
 
-    private String generateString(int length) {
+    public String generateString(int length) {
         Random random = new Random();
         char[] characters = new char[] {
                 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h',
@@ -20,7 +20,7 @@ public class PassGenerator {
         return String.valueOf(result);
     }
 
-    private String generateNumber(int length) {
+    public String generateNumber(int length) {
         Random random = new Random();
         String result = "";
         while (result.length() != length) {
@@ -29,7 +29,7 @@ public class PassGenerator {
         return result;
     }
 
-    private boolean check(String string) {
+    public boolean check(String string) {
         Pattern pattern = Pattern.compile("[\\d\\w].");
         return pattern.matcher(string).find();
     }

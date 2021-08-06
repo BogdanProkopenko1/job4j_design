@@ -14,8 +14,8 @@ public class UndergroundParking implements Parking {
 
     public UndergroundParking(int liteParkPlaces, int heavyParkPlaces) {
         if (liteParkPlaces < 0 || heavyParkPlaces < 0) {
-            throw new IllegalArgumentException("Parking cannot have a negative number of spaces")
-;        }
+            throw new IllegalArgumentException("Parking cannot have a negative number of spaces");
+        }
         this.liteParkPlaces = liteParkPlaces;
         this.heavyParkPlaces = heavyParkPlaces;
     }

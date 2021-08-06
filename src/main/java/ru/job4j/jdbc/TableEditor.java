@@ -24,7 +24,7 @@ public class TableEditor implements AutoCloseable {
         );
     }
 
-    private void Action(String sql){
+    private void action(String sql) {
         try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
@@ -33,23 +33,23 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) {
-        Action(String.format("create table %s()", tableName));
+        action(String.format("create table %s()", tableName));
     }
 
     public void dropTable(String tableName) {
-        Action(String.format("drop table %s", tableName));
+        action(String.format("drop table %s", tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) {
-        Action(String.format("alter table %s add column %s %s", tableName, columnName, type));
+        action(String.format("alter table %s add column %s %s", tableName, columnName, type));
     }
 
     public void dropColumn(String tableName, String columnName) {
-        Action(String.format("alter table %s drop column %s", tableName, columnName));
+        action(String.format("alter table %s drop column %s", tableName, columnName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        Action(String.format("alter table %s rename column %s to %s", tableName, columnName, newColumnName));
+        action(String.format("alter table %s rename column %s to %s", tableName, columnName, newColumnName));
     }
 
     public String getScheme(String tableName) throws Exception {
