@@ -2,6 +2,9 @@ package ru.job4j.serialization.java;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import ru.job4j.collection.list.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -14,6 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @XmlRootElement(name = "jsontest")
@@ -39,15 +43,36 @@ public class JSONTest {
         this.user = user;
     }
 
+
+    public boolean isResolution() {
+        return resolution;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String[] getRequisites() {
+        return requisites;
+    }
+
     @Override
     public String toString() {
-        return "JSONTest{" +
-                "resolution=" + resolution +
-                ", balance=" + balance +
-                ", login='" + login + '\'' +
-                ", requisites=" + Arrays.toString(requisites) +
-                ", user=" + user +
-                '}';
+        return "JSONTest{"
+                + "resolution=" + resolution
+                + ", balance=" + balance
+                + ", login='" + login + '\''
+                + ", requisites=" + Arrays.toString(requisites)
+                + ", user=" + user
+                + '}';
     }
 
     public static void main(String[] args) throws JAXBException {
@@ -60,7 +85,6 @@ public class JSONTest {
         System.out.println(el);
         final JSONTest post = gson.fromJson(el, JSONTest.class);
         System.out.println(post + System.lineSeparator());
-
         JAXBContext context = JAXBContext.newInstance(JSONTest.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -77,5 +101,34 @@ public class JSONTest {
             JSONTest result = (JSONTest) unmarshaller.unmarshal(reader);
             System.out.println(result);
         }
+
+        JSONObject jsonUser = new JSONObject(
+                "{"
+                        + "\"name\":i am"
+                        + "\"pass\":passw"
+                        + "}"
+        );
     }
 }
+        /* JSONArray из ArrayList *
+        List<String> list = new ArrayList<String>();
+        list.add("Student");
+        list.add("Free");
+        JSONArray jsonStatuses = new JSONArray(list);
+
+        /* JSONObject напрямую методом put *
+        final JSONTest jsonTest = new JSONTest(false, 1, "LoGiN1", new String[] {"gt"}, new User("Bogdan", "password"));
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("resolution", jsonTest.isResolution());
+        jsonObject.put("age", person.getAge());
+        jsonObject.put("contact", jsonContact);
+        jsonObject.put("statuses", jsonStatuses);
+
+        /* Выведем результат в консоль *
+        System.out.println(jsonObject.toString());
+
+        /* Преобразуем объект person в json-строку *
+        System.out.println(new JSONObject(person).toString());
+    }
+}
+         */

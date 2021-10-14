@@ -90,7 +90,7 @@ public class Menu {
             this.parent = parent;
         }
 
-        public Node() {}
+        public Node() { }
 
         private String getText() {
             return text;

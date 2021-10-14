@@ -55,4 +55,20 @@ public class ListUtilsTest {
         ListUtils.removeAll(list, list1);
         assertThat(Arrays.asList("Dmitry", "Bogdan"), Is.is(list));
     }
+/*
+    @Test
+    public void whenAddAfterLast() {
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 4));
+        ListUtils.addAfter(input, 2, 5);
+        assertThat(Arrays.asList(1, 2, 4, 5), Is.is(input));
+    }
+
+    @Test
+    public void whenAddBeforeFirst() {
+        List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 4));
+        ListUtils.addAfter(input, 0, 0);
+        assertThat(Arrays.asList(0, 1, 2, 4), Is.is(input));
+    }
+
+ */
 }
